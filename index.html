@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>n studio — Hand Made Design</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500&family=Jost:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--aegean:#1a6fa3;--sky:#4ca3d4;--sky-lt:#a8d4ec;--sky-pale:#ddeef8;--white:#ffffff;--off:#f8f5f1;--nerium:#d9607a;--nerium-lt:#ebb8c6;--nerium-pale:#faedf1;--ink:#1c2b38;--text:#3d5060;--stone:#8b9aaa;}
+    *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
+    ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-thumb{background:var(--sky-lt);}
+    nav{position:fixed;top:0;width:100%;z-index:200;padding:1.2rem 3.5rem;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid rgba(26,111,163,.08);}
+    .logo{text-decoration:none;display:flex;flex-direction:column;line-height:1;}
+    .logo-name{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:400;letter-spacing:.25em;color:var(--ink);}
+    .logo-sub{font-size:.52rem;letter-spacing:.32em;text-transform:uppercase;color:var(--stone);margin-top:.12rem;}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center;}
+    .nav-links a{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text);text-decoration:none;transition:color .3s;}
+    .nav-links a:hover{color:var(--aegean);}
+    .nav-btn{background:var(--aegean)!important;color:white!important;padding:.5rem 1.4rem;}
+    .nav-btn:hover{background:var(--sky)!important;}
+    .hero{position:relative;width:100%;height:100vh;min-height:620px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:#050f22;}
+    #beadCanvas{position:absolute;top:0;left:0;width:100%;height:100%;display:block;min-width:100%;min-height:100%;}
+    .hero-veil{position:absolute;inset:0;background:radial-gradient(ellipse 58% 65% at 50% 50%,rgba(6,14,34,.76) 0%,rgba(6,14,34,.28) 65%,transparent 100%);pointer-events:none;z-index:1;}
+    .hero-content{position:relative;z-index:2;text-align:center;padding:2rem;max-width:820px;}
+    .eyeline{display:inline-flex;align-items:center;gap:.8rem;font-weight:200;font-size:.62rem;letter-spacing:.45em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.6rem;}
+    .eyeline::before,.eyeline::after{content:'';width:22px;height:1px;background:rgba(255,255,255,.28);}
+    .hero h1{font-family:'Cinzel',serif;font-size:clamp(4rem,10vw,9.5rem);font-weight:400;letter-spacing:.1em;color:#fff;line-height:.95;margin-bottom:.7rem;text-shadow:0 2px 60px rgba(0,0,0,.55);}
+    .hero h1 .amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;color:#6dd9d0;letter-spacing:.05em;}
+    .hero-desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.05rem,2.2vw,1.55rem);color:rgba(255,255,255,.65);letter-spacing:.03em;margin-bottom:2.8rem;line-height:1.55;}
+    .btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+    .btn-teal{display:inline-block;padding:.82rem 2.4rem;background:rgba(109,217,208,.15);border:1px solid rgba(109,217,208,.55);color:#6dd9d0;text-decoration:none;font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;transition:all .4s;backdrop-filter:blur(8px);}
+    .btn-teal:hover{background:rgba(109,217,208,.3);transform:translateY(-2px);}
+    .btn-pink{display:inline-block;padding:.82rem 2.4rem;background:rgba(217,96,122,.14);border:1px solid rgba(217,96,122,.48);color:#f4a0b4;text-decoration:none;font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;transition:all .4s;backdrop-filter:blur(8px);}
+    .btn-pink:hover{background:rgba(217,96,122,.3);transform:translateY(-2px);}
+    .scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:.4rem;animation:scrollBob 2.5s ease-in-out infinite;}
+    .scroll-cue span{font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.35);}
+    .scroll-line{width:1px;height:28px;background:linear-gradient(to bottom,rgba(255,255,255,.35),transparent);}
+    @keyframes scrollBob{0%,100%{opacity:.4;transform:translateX(-50%) translateY(0);}50%{opacity:.7;transform:translateX(-50%) translateY(5px);}}
+    .band{background:var(--aegean);padding:1.3rem 3rem;display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap;}
+    .band span{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.78);white-space:nowrap;}
+    .band-dot{width:3px;height:3px;border-radius:50%;background:var(--nerium-lt);flex-shrink:0;}
+    .sec{padding:5.5rem 3.5rem;max-width:1300px;margin:0 auto;}
+    .sec-label{font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--nerium);margin-bottom:.6rem;}
+    .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3.8vw,3rem);font-weight:400;color:var(--ink);line-height:1.2;}
+    .filter-row{display:flex;gap:.6rem;margin:2.5rem 0 2.8rem;flex-wrap:wrap;}
+    .ftab{padding:.45rem 1.2rem;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(26,111,163,.18);color:var(--stone);background:transparent;cursor:pointer;transition:all .3s;}
+    .ftab:hover,.ftab.active{background:var(--aegean);color:white;border-color:var(--aegean);}
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
+    .g-card{background:var(--off);overflow:hidden;cursor:pointer;transition:transform .35s,box-shadow .35s;}
+    .g-card:hover{transform:translateY(-7px);box-shadow:0 20px 50px rgba(26,111,163,.13);}
+    .g-card.hidden{display:none;}
+    .g-img{aspect-ratio:1/1;overflow:hidden;position:relative;}
+    .g-img img{width:100%;height:100%;object-fit:cover;transition:transform .55s;filter:saturate(1.08);}
+    .g-card:hover .g-img img{transform:scale(1.07);}
+    .g-tag{position:absolute;top:.8rem;left:.8rem;background:var(--nerium);color:white;font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;padding:.25rem .65rem;}
+    .g-tag.blue{background:var(--aegean);}.g-tag.teal{background:#3a9a8a;}
+    .g-body{padding:1.1rem 1.2rem 1.4rem;}
+    .g-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--ink);margin-bottom:.25rem;}
+    .g-desc{font-size:.72rem;line-height:1.6;opacity:.65;margin-bottom:.9rem;}
+    .g-foot{display:flex;justify-content:space-between;align-items:center;}
+    .g-price{font-family:'Cormorant Garamond',serif;font-size:.88rem;color:var(--aegean);font-style:italic;}
+    .g-btn{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:white;background:var(--aegean);padding:.38rem .95rem;text-decoration:none;transition:background .3s;border:none;cursor:pointer;}
+    .g-btn:hover{background:var(--sky);}
+    .lifestyle-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;max-height:420px;overflow:hidden;}
+    .ls-img{overflow:hidden;}.ls-img img{width:100%;height:100%;object-fit:cover;filter:saturate(1.1);transition:transform .55s;}.ls-img:hover img{transform:scale(1.04);}
+    .quote-band{padding:4rem 3.5rem;background:linear-gradient(135deg,var(--nerium-pale),var(--sky-pale));text-align:center;}
+    .quote-band p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.25rem,2.8vw,1.95rem);color:var(--ink);max-width:660px;margin:0 auto;line-height:1.75;}
+    .quote-band p span{color:var(--nerium);}.quote-band p em{color:var(--aegean);font-style:normal;}
+    .about-bg{background:var(--sky-pale);}
+    .about-inner{display:grid;grid-template-columns:1fr 1.1fr;gap:6rem;align-items:center;}
+    .about-text .sec-title{margin-bottom:1.4rem;}
+    .about-text p{font-size:.9rem;line-height:1.95;margin-bottom:1.2rem;opacity:.84;}
+    blockquote{border-left:3px solid var(--nerium);padding:.75rem 0 .75rem 1.4rem;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.35rem;color:var(--aegean);line-height:1.5;margin:1.8rem 0;}
+    .about-img-wrap{position:relative;}.about-img-main{aspect-ratio:3/4;overflow:hidden;}.about-img-main img{width:100%;height:100%;object-fit:cover;filter:saturate(1.12);}
+    .about-img-float{position:absolute;bottom:-2.5rem;right:-2.5rem;width:48%;aspect-ratio:1/1;overflow:hidden;border:5px solid white;box-shadow:0 12px 40px rgba(0,0,0,.11);}
+    .about-img-float img{width:100%;height:100%;object-fit:cover;}
+    .btn-solid{display:inline-block;padding:.82rem 2.4rem;background:var(--aegean);color:white;text-decoration:none;font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;transition:background .3s;}
+    .btn-solid:hover{background:var(--sky);}
+    .info-pill{display:inline-flex;align-items:center;gap:.45rem;background:var(--sky-pale);padding:.45rem 1rem;font-size:.7rem;letter-spacing:.08em;color:var(--aegean);margin-bottom:.5rem;}
+    .info-pill::before{content:'◆';font-size:.45rem;}
+    .order-info h3{font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--ink);line-height:1.2;margin-bottom:1rem;}
+    .order-info p{font-size:.86rem;line-height:1.9;opacity:.78;margin-bottom:1.1rem;}
+    .social-row{display:flex;gap:1.4rem;margin-top:1.5rem;flex-wrap:wrap;}
+    .social-a{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--aegean);text-decoration:none;border-bottom:1px solid var(--sky-lt);padding-bottom:2px;transition:color .3s,border-color .3s;}
+    .social-a:hover{color:var(--nerium);border-color:var(--nerium-lt);}
+    footer{background:var(--ink);padding:2.5rem 3.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .foot-brand{font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:.3em;color:rgba(255,255,255,.85);}
+    .foot-sub{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:.18rem;}
+    .foot-copy{font-size:.65rem;color:rgba(255,255,255,.28);letter-spacing:.08em;}
+    .lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(7,16,28,.88);align-items:center;justify-content:center;padding:2rem;}
+    .lb.open{display:flex;}
+    .lb-inner{background:white;max-width:820px;width:100%;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;position:relative;}
+    .lb-img{aspect-ratio:1/1;overflow:hidden;}.lb-img img{width:100%;height:100%;object-fit:cover;}
+    .lb-info{padding:2.5rem;}
+    .lb-name{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--ink);margin-bottom:.6rem;}
+    .lb-desc{font-size:.85rem;line-height:1.85;opacity:.75;margin-bottom:1.5rem;}
+    .lb-close{position:absolute;top:1rem;right:1rem;width:32px;height:32px;background:var(--ink);color:white;border:none;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    .lb-buy{display:inline-block;padding:.75rem 1.8rem;background:var(--aegean);color:white;text-decoration:none;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;transition:background .3s;}
+    .lb-buy:hover{background:var(--sky);}
+    @media(max-width:1000px){.gallery{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:768px){nav{padding:1.1rem 1.5rem;}.nav-links{display:none;}.sec{padding:3.5rem 1.5rem;}.band{padding:1.1rem 1.5rem;gap:1.5rem;}.about-inner{grid-template-columns:1fr;gap:3rem;}.about-img-float{display:none;}.gallery{grid-template-columns:repeat(2,1fr);}.lifestyle-strip{grid-template-columns:1fr 1fr;}.lb-inner{grid-template-columns:1fr;}footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}}
+    @media(max-width:420px){.gallery{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="#"><span class="logo-name">n studio</span><span class="logo-sub">Hand Made Design</span></a>
+  <ul class="nav-links">
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#about">Story</a></li>
+    <li><a href="#order">Order</a></li>
+    <li><a href="#order" class="nav-btn">Order a Custom Piece</a></li>
+  </ul>
+</nav>
+<header class="hero">
+  <canvas id="beadCanvas"></canvas>
+  <div class="hero-veil"></div>
+  <div class="hero-content">
+    <p class="eyeline">Evil Eye · Glass Bead · Handmade</p>
+    <h1>n<span class="amp"> &amp; </span>studio</h1>
+    <p class="hero-desc">Every bead chosen. Every eye placed<br/>where it can see.</p>
+    <div class="btn-row">
+      <a href="#collection" class="btn-teal">See the Collection</a>
+      <a href="#order" class="btn-pink">Order a Custom Piece</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+</header>
+<div class="band">
+  <span>Handmade in Istanbul</span><div class="band-dot"></div>
+  <span>Glass Evil Eye Beads</span><div class="band-dot"></div>
+  <span>Made in Istanbul · Distributed from London</span><div class="band-dot"></div>
+  <span>No Two Pieces Alike</span>
+</div>
+<div class="sec" id="collection">
+  <p class="sec-label">The Collection</p>
+  <h2 class="sec-title">Every bracelet tells a story</h2>
+  <div class="filter-row">
+    <button class="ftab active" data-filter="all">All Pieces</button>
+    <button class="ftab" data-filter="single">Individual</button>
+    <button class="ftab" data-filter="stack">Stacks</button>
+  </div>
+  <div class="gallery">
+    <div class="g-card" data-cat="single" onclick="openLB('Aegean Blue','images/IMG_7577.jpg','Teal cube beads with a bold cobalt blue glass evil eye. Gold spacer detail.')">
+      <div class="g-img"><img src="images/IMG_7577.jpg" alt="Aegean Blue"/><span class="g-tag blue">In Stock</span></div>
+      <div class="g-body"><h3 class="g-name">Aegean Blue</h3><p class="g-desc">Teal cube beads · cobalt glass eye · gold spacer</p>
+      <div class="g-foot"><span class="g-price">£25</span><a href="https://buy.stripe.com/4gM6oB7FI6Sn9o2bb84c80y" target="_blank" class="g-btn">Buy Now</a></div></div>
+    </div>
+    <div class="g-card" data-cat="single" onclick="openLB('Forest &amp; Flame','images/IMG_7588.jpg','Two shades of green with a marbled amber-yellow evil eye. Gold ring spacers add warmth.')">
+      <div class="g-img"><img src="images/IMG_7588.jpg" alt="Forest & Flame"/><span class="g-tag teal">In Stock</span></div>
+      <div class="g-body"><h3 class="g-name">Forest &amp; Flame</h3><p class="g-desc">Two-tone green beads · marbled amber eye · gold rings</p>
+      <div class="g-foot"><span class="g-price">£25</span><a href="https://buy.stripe.com/3cIaER7FI7Wr9o22EC4c80x" target="_blank" class="g-btn">Buy Now</a></div></div>
+    </div>
+    <div class="g-card" data-cat="single" onclick="openLB('Ember &amp; Dusk','images/IMG_7589.jpg','Burnt orange on one side, deep smoky grey on the other, meeting at a dark swirling marbled eye.')">
+      <div class="g-img"><img src="images/IMG_7589.jpg" alt="Ember & Dusk"/><span class="g-tag">New</span></div>
+      <div class="g-body"><h3 class="g-name">Ember &amp; Dusk</h3><p class="g-desc">Burnt orange + smoky grey · dark marbled eye</p>
+      <div class="g-foot"><span class="g-price">£25</span><a href="https://buy.stripe.com/6oUbIVbVYekPfMqdjg4c80w" target="_blank" class="g-btn">Buy Now</a></div></div>
+    </div>
+    <div class="g-card" data-cat="single" onclick="openLB('Terracotta Sun','images/IMG_7590.jpg','Warm burnt terracotta cubes with a large swirling sea-green and gold marbled eye.')">
+      <div class="g-img"><img src="images/IMG_7590.jpg" alt="Terracotta Sun"/><span class="g-tag">New</span></div>
+      <div class="g-body"><h3 class="g-name">Terracotta Sun</h3><p class="g-desc">Terracotta beads · marbled sea-green eye · gold accent</p>
+      <div class="g-foot"><span class="g-price">£25</span><a href="https://buy.stripe.com/6oU14hgce1y3cAe4MK4c80v" target="_blank" class="g-btn">Buy Now</a></div></div>
+    </div>
+    <div class="g-card" data-cat="single" onclick="openLB('Olive Grove','images/IMG_7597.jpg','Deep jade cube beads, a murano-style eye, gold bead, and a delicate grey tassel.')">
+      <div class="g-img"><img src="images/IMG_7597.jpg" alt="Olive Grove"/><span class="g-tag teal">Favourite</span></div>
+      <div class="g-body"><h3 class="g-name">Olive Grove</h3><p class="g-desc">Jade cube beads · murano eye · grey tassel · gold bead</p>
+      <div class="g-foot"><span class="g-price">£32</span><a href="https://buy.stripe.com/8x228le460tZ0Rw7YW4c80s" target="_blank" class="g-btn">Buy Now</a></div></div>
+    </div>
+    <div class="g-card" data-cat="single" onclick="openLB('Deep Forest','images/IMG_7599.jpg','Teal and deep purple cube beads meet at a large dark marbled eye — moody, rich, unexpected.')">
+      <div class="g-img"><img src="images/IMG_7599.jpg" alt="Deep Forest"/><span class="g-tag teal">In Stock</span></div>
+      <div class="g-body"><h3 class="g-name">Deep Forest</h3><p class="g-desc">Teal + purple cube beads · dark marbled eye</p>
+      <div class="g-foot"><span class="g-price">£25</span><a href="https://buy.stripe.com/4gM28l3psfoT9o26US4c80u" target="_blank" class="g-btn">Buy Now</a></div></div>
+    </div>
+    <div class="g-card" data-cat="single" onclick="openLB('Sky &amp; Sea','images/IMG_7683.jpg','Pale sky-blue disc beads with a petite blue-and-white evil eye as the centrepiece.')">
+      <div class="g-img"><img src="images/IMG_7683.jpg" alt="Sky & Sea"/><span class="g-tag blue">In Stock</span></div>
+      <div class="g-body"><h3 class="g-name">Sky &amp; Sea</h3><p class="g-desc">Baby blue disc beads · small blue &amp; white eye</p>
+      <div class="g-foot"><span class="g-price">£22</span><a href="https://buy.stripe.com/dRm8wJ2lob8DdEigvs4c80q" target="_blank" class="g-btn">Buy Now</a></div></div>
+    </div>
+    <div class="g-card" data-cat="single" onclick="openLB('Sunset Horizon','images/IMG_7685.jpg','Half terracotta, half baby blue — a colour split that mimics a Mediterranean sunset. Gold triangle charm.')">
+      <div class="g-img"><img src="images/IMG_7685.jpg" alt="Sunset Horizon"/><span class="g-tag">New</span></div>
+      <div class="g-body"><h3 class="g-name">Sunset Horizon</h3><p class="g-desc">Terracotta + sky blue · white eye · gold triangle</p>
+      <div class="g-foot"><span class="g-price">£28</span><a href="https://buy.stripe.com/3cI8wJf8agsX2ZE2EC4c80p" target="_blank" class="g-btn">Buy Now</a></div></div>
+    </div>
+    <div class="g-card" data-cat="single" onclick="openLB('Sea Garden','images/IMG_7740.jpg','Matte forest green cube beads with a handcrafted green eye and a gold bird charm.')">
+      <div class="g-img"><img src="images/IMG_7740.jpg" alt="Sea Garden"/><span class="g-tag teal">In Stock</span></div>
+      <div class="g-body"><h3 class="g-name">Sea Garden</h3><p class="g-desc">Forest green beads · green eye · gold charm</p>
+      <div class="g-foot"><span class="g-price">£30</span><a href="https://buy.stripe.com/cNidR3e46dgLgQu2EC4c80m" target="_blank" class="g-btn">Buy Now</a></div></div>
+    </div>
+    <div class="g-card" data-cat="single" onclick="openLB('Lavender Dreams','images/IMG_8170.jpg','Dusty mauve round beads with watercolour quartz and a clear crystalline glass evil eye.')">
+      <div class="g-img"><img src="images/IMG_8170.jpg" alt="Lavender Dreams"/><span class="g-tag">New</span></div>
+      <div class="g-body"><h3 class="g-name">Lavender Dreams</h3><p class="g-desc">Dusty mauve + mixed quartz · crystal clear eye</p>
+      <div class="g-foot"><span class="g-price">£28</span><a href="https://buy.stripe.com/28E6oBbVY1y3gQucfc4c80n" target="_blank" class="g-btn">Buy Now</a></div></div>
+    </div>
+    <div class="g-card" data-cat="stack" onclick="openLB('The Kaleidoscope Stack','images/IMG_7669.jpg','Five bracelets worn together — yellow eye, cobalt blue eye, teal eye, frosted green eye, and seed bead layers.')">
+      <div class="g-img"><img src="images/IMG_7669.jpg" alt="The Kaleidoscope Stack"/><span class="g-tag blue">Stack</span></div>
+      <div class="g-body"><h3 class="g-name">The Kaleidoscope Stack</h3><p class="g-desc">Yellow · blue · teal · green eyes layered</p>
+      <div class="g-foot"><span class="g-price">£65</span><a href="https://buy.stripe.com/eVqdR3gce7Wr8jYcfc4c80j" target="_blank" class="g-btn">Buy Now</a></div></div>
+    </div>
+    <div class="g-card" data-cat="stack" onclick="openLB('Train to Somewhere','images/IMG_2612.jpg','The original stack — teal eye, green eye, seed beads and red ceramics. The one that made us begin.')">
+      <div class="g-img"><img src="images/IMG_2612.jpg" alt="Train to Somewhere"/><span class="g-tag">Origin</span></div>
+      <div class="g-body"><h3 class="g-name">Train to Somewhere</h3><p class="g-desc">The original stack · teal + green eyes · red ceramic</p>
+      <div class="g-foot"><span class="g-price">£65</span><a href="https://buy.stripe.com/8x27sF2lo7Wr43Ifro4c80g" target="_blank" class="g-btn">Buy Now</a></div></div>
+    </div>
+  </div>
+</div>
+<div class="lifestyle-strip">
+  <div class="ls-img"><img src="images/IMG_7669.jpg" alt="wrist shot"/></div>
+  <div class="ls-img"><img src="images/IMG_7672.jpg" alt="wrist shot"/></div>
+  <div class="ls-img"><img src="images/IMG_7670.jpg" alt="wrist shot"/></div>
+</div>
+<div class="quote-band">
+  <p>"The evil eye doesn't ask permission — <span>neither does colour.</span><br/>Wear both like armour. Wear them like <em>joy.</em>"</p>
+</div>
+<div class="about-bg">
+  <div class="sec" id="about">
+    <div class="about-inner">
+      <div class="about-text">
+        <p class="sec-label">The Story</p>
+        <h2 class="sec-title">Made by hand,<br/>worn with meaning</h2>
+        <blockquote>"Every bead is chosen.<br/>Every eye is placed where it can see."</blockquote>
+        <p>n studio grew from a lifelong love of the nazar — the evil eye — and a refusal to let jewellery be dull. Each bracelet is made one at a time in Istanbul, with a glass evil eye bead at its centre and a carefully chosen mix of ceramic, stone, and glass beads around it.</p>
+        <p>No two are the same. When you wear one, you're wearing something that exists only once in the world.</p>
+        <p style="font-size:.78rem;color:var(--stone);">Design by Latife Nesrin · Made in Istanbul · Distributed from London</p>
+        <div style="margin-top:2rem;"><a href="#order" class="btn-solid">Order a Custom Piece</a></div>
+      </div>
+      <div class="about-img-wrap">
+        <div class="about-img-main"><img src="images/IMG_7597.jpg" alt="Olive Grove bracelet"/></div>
+        <div class="about-img-float"><img src="images/IMG_7590.jpg" alt="Terracotta Sun"/></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="sec" id="order">
+  <p class="sec-label">Commission</p>
+  <h2 class="sec-title">Want something made just for you?</h2>
+  <div style="max-width:580px;margin-top:2.5rem;">
+    <div class="order-info">
+      <h3>Every piece is made to order.</h3>
+      <p>If you want a custom colour, a specific eye, a charm — or a full stack built around you — just send an email. We'll go from there.</p>
+      <div style="display:flex;flex-direction:column;gap:.5rem;margin:1.5rem 0 2rem;">
+        <div class="info-pill">Made in Istanbul · Distributed from London</div>
+                <div class="info-pill">Ships worldwide</div>
+        <div class="info-pill">Replies within 48 hours</div>
+      </div>
+      <a href="/cdn-cgi/l/email-protection#147071677d737a676061707d7b766d7875607d72717a547379757d783a777b79" class="btn-solid">Email to Commission</a>
+      <div class="social-row">
+        
+        <a href="https://www.instagram.com/queencatatelier/" target="_blank" class="social-a">Instagram</a>
+        <a href="/cdn-cgi/l/email-protection#0e6a6b7d6769607d7a7b6a67616c77626f7a67686b604e69636f6762206d6163" class="social-a"><span class="__cf_email__" data-cfemail="167273657f7178656263727f79746f7a77627f70737856717b777f7a3875797b">[email&#160;protected]</span></a>
+      </div>
+      <p style="font-size:.78rem;opacity:.45;margin-top:1.5rem;">Design by <strong>Latife Nesrin</strong> · n studio</p>
+    </div>
+  </div>
+</div>
+<footer>
+  <div><div class="foot-brand">n studio</div><div class="foot-sub">Hand Made Design · Latife Nesrin</div></div>
+  <span class="foot-copy">Made in Istanbul · Distributed from London · © 2025</span>
+</footer>
+<div class="lb" id="lb" onclick="closeLB(event)">
+  <div class="lb-inner">
+    <div class="lb-img"><img id="lb-img" src="" alt=""/></div>
+    <div class="lb-info">
+      <h2 class="lb-name" id="lb-name"></h2>
+      <p class="lb-desc" id="lb-desc"></p>
+      <a href="#order" class="lb-buy" onclick="closeLBDirect()">Buy / Commission This Piece</a>
+    </div>
+    <button class="lb-close" onclick="closeLBDirect()">&#x2715;</button>
+  </div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+  const canvas=document.getElementById('beadCanvas'),ctx=canvas.getContext('2d');
+  const BC=['#3aa89a','#1a6fa3','#4ca3d4','#2c9d8e','#22b8a8','#c0392b','#d4705a','#c06030','#e07050','#4a8c3a','#2d7a40','#6ab04c','#3a6820','#d4c020','#e0a820','#c8b010','#8a6a9a','#b08ac0','#6a4a8a','#d9607a','#e8a0b4','#c04060','#88ccee','#b8e4f4','#60a8d8','#c8907a','#e0b090','#ffffff','#e8f4f8','#d0e8f0'];
+  const EC=[{i:'#1a6fa3',p:'#051020'},{i:'#3aa89a',p:'#081e18'},{i:'#c0392b',p:'#2a0808'},{i:'#4a8c3a',p:'#0a1808'},{i:'#d4c020',p:'#1a1000'},{i:'#8a6a9a',p:'#180a20'},{i:'#d9607a',p:'#280a12'},{i:'#2240cc',p:'#040818'},{i:'#c8907a',p:'#200c08'},{i:'#20509a',p:'#020810'},{i:'#3a6020',p:'#081008'},{i:'#c86010',p:'#200a00'},{i:'#a020a0',p:'#180018'}];
+  let W,H,els=[],mouse={x:-9999,y:-9999},t=0;
+  const rnd=(a,b)=>a+Math.random()*(b-a);
+  const pick=a=>a[Math.floor(Math.random()*a.length)];
+  function resize(){const d=devicePixelRatio||1;W=canvas.offsetWidth;H=canvas.offsetHeight;canvas.width=W*d;canvas.height=H*d;ctx.scale(d,d);}
+  const mkEye=(x,y)=>{const e=pick(EC);return{type:'eye',x,y,size:rnd(16,56),vx:rnd(-.3,.3),vy:rnd(-.18,.18),wb:rnd(0,Math.PI*2),wbs:rnd(.008,.022),i:e.i,p:e.p,a:rnd(.5,1),rot:rnd(-.4,.4),rs:rnd(-.003,.003)};};
+  const mkBead=(x,y)=>({type:'bead',x,y,size:rnd(5,20),c:pick(BC),vx:rnd(-.38,.38),vy:rnd(-.22,.22),wb:rnd(0,Math.PI*2),wbs:rnd(.01,.026),a:rnd(.35,.95)});
+  const mkDisc=(x,y)=>({type:'disc',x,y,rx:rnd(7,17),ry:rnd(4,9),rot:rnd(0,Math.PI*2),rs:rnd(-.006,.006),c:pick(BC),vx:rnd(-.28,.28),vy:rnd(-.18,.18),wb:rnd(0,Math.PI*2),wbs:rnd(.008,.02),a:rnd(.35,.82)});
+  function populate(){els=[];const area=W*H;const ne=Math.max(20,Math.floor(area/13000)),nb=Math.max(50,Math.floor(area/3500)),nd=Math.max(22,Math.floor(area/7500));for(let i=0;i<ne;i++)els.push(mkEye(rnd(0,W),rnd(0,H)));for(let i=0;i<nb;i++)els.push(mkBead(rnd(0,W),rnd(0,H)));for(let i=0;i<nd;i++)els.push(mkDisc(rnd(0,W),rnd(0,H)));}
+  const lt=(h,a)=>{const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);return`rgb(${Math.min(255,r+a)},${Math.min(255,g+a)},${Math.min(255,b+a)})`;};
+  const dk=(h,a)=>{const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);return`rgb(${Math.max(0,r-a)},${Math.max(0,g-a)},${Math.max(0,b-a)})`;};
+  function drawBG(){const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#050f22');g.addColorStop(.4,'#091828');g.addColorStop(.8,'#071c2c');g.addColorStop(1,'#040e1c');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);[[W*.15,H*.3,320,'rgba(58,168,154,.07)'],[W*.85,H*.2,280,'rgba(26,111,163,.08)'],[W*.5,H*.75,380,'rgba(217,96,122,.05)'],[W*.7,H*.9,220,'rgba(74,140,58,.05)']].forEach(([x,y,r,c])=>{const s=ctx.createRadialGradient(x,y,10,x,y,r);s.addColorStop(0,c);s.addColorStop(1,'transparent');ctx.fillStyle=s;ctx.fillRect(0,0,W,H);});}
+  function drawEye(e){const wy=e.y+Math.sin(e.wb+t*e.wbs)*4;ctx.save();ctx.globalAlpha=e.a;ctx.translate(e.x,wy);ctx.rotate(e.rot);const r=e.size;const bg=ctx.createRadialGradient(-r*.2,-r*.2,r*.04,0,0,r);bg.addColorStop(0,lt(e.i,45));bg.addColorStop(.5,e.i);bg.addColorStop(1,dk(e.i,38));ctx.beginPath();ctx.ellipse(0,0,r,r*.9,0,0,Math.PI*2);ctx.fillStyle=bg;ctx.fill();ctx.beginPath();ctx.ellipse(0,0,r*.56,r*.52,0,0,Math.PI*2);ctx.fillStyle='#f0f8ff';ctx.fill();const ig=ctx.createRadialGradient(0,0,r*.04,0,0,r*.42);ig.addColorStop(0,lt(e.i,22));ig.addColorStop(1,e.i);ctx.beginPath();ctx.ellipse(0,0,r*.38,r*.35,0,0,Math.PI*2);ctx.fillStyle=ig;ctx.fill();ctx.beginPath();ctx.ellipse(0,0,r*.17,r*.16,0,0,Math.PI*2);ctx.fillStyle=e.p;ctx.fill();ctx.beginPath();ctx.ellipse(-r*.22,-r*.22,r*.12,r*.08,-.5,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.52)';ctx.fill();ctx.beginPath();ctx.ellipse(0,0,r,r*.9,0,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,.16)';ctx.lineWidth=1;ctx.stroke();ctx.restore();}
+  function drawBead(b){const wy=b.y+Math.sin(b.wb+t*b.wbs)*3;ctx.save();ctx.globalAlpha=b.a;ctx.translate(b.x,wy);const r=b.size;const g=ctx.createRadialGradient(-r*.3,-r*.3,r*.04,0,0,r);g.addColorStop(0,lt(b.c,48));g.addColorStop(.4,b.c);g.addColorStop(1,dk(b.c,32));ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();ctx.beginPath();ctx.ellipse(-r*.25,-r*.28,r*.28,r*.18,-.4,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.38)';ctx.fill();ctx.restore();}
+  function drawDisc(d){const wy=d.y+Math.sin(d.wb+t*d.wbs)*2.5;ctx.save();ctx.globalAlpha=d.a;ctx.translate(d.x,wy);d.rot+=d.rs;ctx.rotate(d.rot);const g=ctx.createRadialGradient(-d.rx*.2,-d.ry*.2,1,0,0,d.rx);g.addColorStop(0,lt(d.c,42));g.addColorStop(1,dk(d.c,28));ctx.beginPath();ctx.ellipse(0,0,d.rx,d.ry,0,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=.7;ctx.stroke();ctx.beginPath();ctx.arc(0,0,Math.min(d.rx,d.ry)*.2,0,Math.PI*2);ctx.fillStyle='rgba(0,0,0,.45)';ctx.fill();ctx.restore();}
+  canvas.addEventListener('mousemove',e=>{const rc=canvas.getBoundingClientRect();mouse.x=e.clientX-rc.left;mouse.y=e.clientY-rc.top;});
+  canvas.addEventListener('mouseleave',()=>{mouse.x=-9999;mouse.y=-9999;});
+  function tick(){ctx.clearRect(0,0,W,H);drawBG();for(const el of els){const dx=el.x-mouse.x,dy=el.y-mouse.y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<95&&dist>.1){const f=(95-dist)/95*.75;el.vx+=(dx/dist)*f;el.vy+=(dy/dist)*f;}el.vx*=.98;el.vy*=.98;el.x+=el.vx;el.y+=el.vy;const pad=(el.size||el.rx||10)+12;if(el.x<-pad)el.x=W+pad;if(el.x>W+pad)el.x=-pad;if(el.y<-pad)el.y=H+pad;if(el.y>H+pad)el.y=-pad;if(el.type==='eye'){el.rot+=el.rs;drawEye(el);}else if(el.type==='bead')drawBead(el);else drawDisc(el);}t++;requestAnimationFrame(tick);}
+  window.addEventListener('load',()=>{resize();populate();tick();});
+  window.addEventListener('resize',()=>{resize();populate();});
+})();
+document.querySelectorAll('.ftab').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const f=btn.dataset.filter;document.querySelectorAll('.g-card').forEach(c=>{c.classList.toggle('hidden',f!=='all'&&c.dataset.cat!==f);});});});
+function openLB(name,img,desc){document.getElementById('lb-name').textContent=name;document.getElementById('lb-img').src=img;document.getElementById('lb-desc').textContent=desc;document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden';}
+function closeLBDirect(){document.getElementById('lb').classList.remove('open');document.body.style.overflow='';}
+function closeLB(e){if(e.target===document.getElementById('lb'))closeLBDirect();}
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target
